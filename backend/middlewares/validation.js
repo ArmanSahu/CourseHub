@@ -19,7 +19,7 @@ const userSchema = z.object({
     email : emailSchema,
     username : usernameSchema,
     password : passwordSchema
-});
+}).loose();
 
 function validateUser(req,res,next){
     const result = userSchema.safeParse(req.body);
@@ -31,3 +31,26 @@ function validateUser(req,res,next){
 }
 
 module.exports = validateUser;
+
+
+// const adminSchema = userSchema.extend({
+//   secretkey: z.string().min(1)
+// }); Additional option
+
+// function validate(schema){
+//   return (req,res,next) => {
+//     const result = schema.safeParse(req.body);
+
+//     if(!result.success){
+//       return res.status(400).json({
+//         message: "Validation failed",
+//         errormessage: result.error.flatten()
+//       });
+//     }
+
+//     req.body = result.data;
+//     next();
+//   };
+// }
+
+// module.exports = validate;

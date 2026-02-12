@@ -7,6 +7,7 @@ function authorization(req,res,next){
     try{
         const decode = verifyToken(token);
         req.userid = decode.userid;
+        console.log("authorized user");
         next();
     }catch(err){
         return res.status(401).json({message:"Invalid or Expired Token"});

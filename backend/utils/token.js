@@ -6,8 +6,15 @@ function generateToken(user){
     },process.env.JWT_SECRET);
 }
 
+function generateAdminToken(user){
+    return jwt.sign({
+        userid : user._id,
+        role : user.role
+    },process.env.JWT_SECRET);
+}
+
 function verifyToken(token){
     return jwt.verify(token,process.env.JWT_SECRET);
 }
 
-module.exports = {generateToken,verifyToken};
+module.exports = {generateToken,generateAdminToken,verifyToken};
