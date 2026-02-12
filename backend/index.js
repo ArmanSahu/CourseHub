@@ -6,7 +6,7 @@ const adminRoutes = require("./routes/admin.route");
 const courseRoutes = require("./routes/course.route");
 const orderRoutes = require("./routes/order.route");
 const cookieParser = require("cookie-parser");
-const connectToDatabase = require("./database");
+const connectToDatabase = require("./database/db");
 require("dotenv").config();
 
 
@@ -20,7 +20,7 @@ app.use(cors());
 app.use(cookieParser());
 
 //routes
-app.use("/api/user",authRoutes);
+app.use("/api/auth",authRoutes);
 app.use("/api/user",userRoutes);
 app.use("/api/admin",adminRoutes)
 app.use("/api/courses",courseRoutes);
