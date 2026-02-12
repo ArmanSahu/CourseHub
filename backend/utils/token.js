@@ -6,4 +6,8 @@ function generateToken(user){
     },process.env.JWT_SECRET);
 }
 
-module.exports = {generateToken}
+function verifyToken(token){
+    return jwt.verify(token,process.env.JWT_SECRET);
+}
+
+module.exports = {generateToken,verifyToken};
