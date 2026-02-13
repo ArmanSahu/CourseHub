@@ -15,7 +15,6 @@ function validateAdmin(req,res,next){
             userid : decode.userid,
             role : decode.role
         }
-        console.log("validated")
         next();
     }catch(err){
         return res.status(400).json({message:`Invalid Token : ${err.message}`});
