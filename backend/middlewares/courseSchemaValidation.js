@@ -1,9 +1,8 @@
 const {z} = require("zod");
 
-const titleSchema = z.string().regex(/^[A-Z' ']+$/);
+const titleSchema = z.string().min(3).max(100);
 const descriptionSchema = z.string().regex(/^[A-Z]/,"One uppercase letter");
-const priceSchema = z.number("Must contain a number");
-
+const priceSchema = z.coerce.number();
 const CourseSchema = z.object({
     title : titleSchema,
     description : descriptionSchema,

@@ -7,7 +7,7 @@ const CourseSchema = new Schema({
         type : String,
         unique : true,
         trim : true,
-        toLowerCase : true
+        lowercase : true
     },
     description : String,
     price : Number,

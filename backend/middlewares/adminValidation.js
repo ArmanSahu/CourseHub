@@ -3,7 +3,7 @@ const {verifyToken} = require("../utils/token");
 function validateAdmin(req,res,next){
     const token = req.cookies.token;
     if(!token){
-        return res.status(400).json({message:"Token expired or Invalid"});
+        return res.status(401).json({message:"Token expired or Invalid"});
     }
     try{
         const decode = verifyToken(token);

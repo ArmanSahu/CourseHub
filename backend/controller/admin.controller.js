@@ -56,10 +56,6 @@ async function createCourse(req,res){
     const userid = req.user.userid;
     const {title,description,price} = req.body;
     try{
-        const user = await UserModel.findById(userid);
-        if(!user){
-            return res.status(401).json({message:"User not found"});
-        }
         const newCourse = await CourseModel.create({
             title : title,
             description : description,
@@ -134,14 +130,12 @@ async function getUsers(req,res){
         if(userIdDetails.length===0){
             return res.status(200).json({message:"No courses purchased"});
         }
-        const userdetails = [];
-        userIdDetails.forEach(async(id)=>{
-            const userinfo = await UserModel.findById(id);
-            userdetails.push(userinfo);
-        });
+        const userdetails = await promise.all(
+            userIdDetails.map(id => UserModel.findById(id))
+        );
         res.status(200).json({userdetails});
     }catch(err){
-        return res.status(200).json({message:"Databas Error",error : err.message});
+        return res.status(400).json({message:"Databas Error",error : err.message});
     }
 }
 
