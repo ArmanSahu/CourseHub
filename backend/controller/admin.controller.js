@@ -126,10 +126,10 @@ async function getUsers(req,res){
         const purchaseDetails = await PurchaseModel.find({
             courseId : courseId
         });
-        const userIdDetails = purchaseDetails.map(purchase => purchase.userId);
-        if(userIdDetails.length===0){
+        if(purchaseDetails.length === 0 ){
             return res.status(200).json({message:"No courses purchased"});
         }
+        const userIdDetails = purchaseDetails.map(purchase => purchase.userId);
         const userdetails = await promise.all(
             userIdDetails.map(id => UserModel.findById(id))
         );
